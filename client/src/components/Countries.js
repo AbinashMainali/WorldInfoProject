@@ -9,7 +9,6 @@ import {
   Typography,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import "motion-ui/dist/motion-ui.min.css";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IMAGES } from "../helpers/constants";
