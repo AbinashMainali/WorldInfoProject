@@ -9,9 +9,8 @@ import {
   Typography,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { IMAGES } from "../helpers/constants";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -50,27 +49,8 @@ const Countries = ({ data, loading }) => {
   const navigate = useNavigate();
   const [nameFilter, setNameFilter] = useState("");
   const [regionFilter, setRegionFilter] = useState("All");
-  const [countriesData, setCountriesData] = useState([]);
+
   const classes = useStyles();
-
-  useEffect(() => {
-    if (data && !loading) {
-      setCountriesData(
-        data.sort((a, b) => a.name.common.localeCompare(b.name.common))
-      );
-    }
-  }, [data, loading]);
-
-  useEffect(() => {
-    if (data && !loading) {
-      setCountriesData((prevData) =>
-        prevData.map((country, index) => ({
-          ...country,
-          images: IMAGES[index],
-        }))
-      );
-    }
-  }, [data, loading]);
 
   const handleNameFilter = useCallback((e) => {
     setNameFilter(e.target.value);
@@ -129,8 +109,8 @@ const Countries = ({ data, loading }) => {
         <Grid item xs={12}>
           <Grid container spacing={3}>
             {!loading &&
-              countriesData.length > 0 &&
-              countriesData
+              data.length > 0 &&
+              data
                 .filter((country) =>
                   country.name.common
                     .toLowerCase()

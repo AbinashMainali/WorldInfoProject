@@ -21,11 +21,13 @@ import { ColorModeContext, createCustomTheme } from "./helpers/context";
 import Breadcrumbs from "./shared/Breadcrumbs";
 import Header from "./shared/Header";
 import useAxiosFetch from "./shared/useAxiosFetch";
+import { IMAGES } from "./helpers/constants";
 
 function App() {
   const location = useLocation();
   const [header, setHeader] = useState("");
   const [mode, setMode] = useState("light");
+  const [countriesData, setCountriesData] = useState([]);
 
   const { data, loading } = useAxiosFetch(
     REST_COUNTRIES_URL,
@@ -41,6 +43,25 @@ function App() {
     window.scrollTo(0, 0); 
   }, [pathname]);
 
+
+  useEffect(() => {
+    if (data && !loading) {
+      setCountriesData(
+        data.sort((a, b) => a.name.common.localeCompare(b.name.common))
+      );
+    }
+  }, [data, loading]);
+
+  useEffect(() => {
+    if (data && !loading) {
+      setCountriesData((prevData) =>
+        prevData.map((country, index) => ({
+          ...country,
+          images: IMAGES[index],
+        }))
+      );
+    }
+  }, [data, loading]);
 
 
   useEffect(() => {
@@ -101,7 +122,7 @@ function App() {
               <Routes>
                 <Route
                   path="/"
-                  element={<Countries data={data} loading={loading} />}
+                  element={<Countries data={countriesData} loading={loading} />}
                 />
                 <Route
                   path="/:name"
