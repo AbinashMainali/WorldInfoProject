@@ -16,7 +16,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Countries from "./components/Countries";
 import Country from "./components/Country";
-import { REST_COUNTRIES_URL } from "./helpers/constants";
+import { PROXY_URL, REST_COUNTRIES_URL } from "./helpers/constants";
 import { ColorModeContext, createCustomTheme } from "./helpers/context";
 import Breadcrumbs from "./shared/Breadcrumbs";
 import Header from "./shared/Header";
@@ -30,7 +30,7 @@ function App() {
   const [countriesData, setCountriesData] = useState([]);
 
   const { data, loading } = useAxiosFetch(
-    REST_COUNTRIES_URL,
+    PROXY_URL + encodeURIComponent(REST_COUNTRIES_URL),
     {},
     0,
     false,
@@ -45,7 +45,7 @@ function App() {
 
 
   useEffect(() => {
-    if (data && !loading) {
+    if (data && data.length > 0 && !loading) {
       setCountriesData(
         data.sort((a, b) => a.name.common.localeCompare(b.name.common))
       );
@@ -53,7 +53,7 @@ function App() {
   }, [data, loading]);
 
   useEffect(() => {
-    if (data && !loading) {
+    if (data  && data.length > 0 && !loading) {
       setCountriesData((prevData) =>
         prevData.map((country, index) => ({
           ...country,

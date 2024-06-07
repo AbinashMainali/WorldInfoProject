@@ -1,4 +1,5 @@
-export const REST_COUNTRIES_URL = "https://cors-anywhere.herokuapp.com/https://restcountries.com/v3.1/all";
+export const REST_COUNTRIES_URL = "https://restcountries.com/v3.1/all";
+export const PROXY_URL = 'https://api.allorigins.win/get?url=';
 
 export const IMAGES = [
   {
