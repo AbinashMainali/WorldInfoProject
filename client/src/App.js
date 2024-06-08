@@ -16,12 +16,11 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Countries from "./components/Countries";
 import Country from "./components/Country";
-import { PROXY_URL, REST_COUNTRIES_URL } from "./helpers/constants";
+import { IMAGES, REST_COUNTRIES_URL } from "./helpers/constants";
 import { ColorModeContext, createCustomTheme } from "./helpers/context";
 import Breadcrumbs from "./shared/Breadcrumbs";
 import Header from "./shared/Header";
 import useAxiosFetch from "./shared/useAxiosFetch";
-import { IMAGES } from "./helpers/constants";
 
 function App() {
   const location = useLocation();
@@ -30,7 +29,7 @@ function App() {
   const [countriesData, setCountriesData] = useState([]);
 
   const { data, loading } = useAxiosFetch(
-    PROXY_URL + encodeURIComponent(REST_COUNTRIES_URL),
+    REST_COUNTRIES_URL,
     {},
     0,
     false,

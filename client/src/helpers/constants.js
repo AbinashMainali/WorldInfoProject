@@ -1,5 +1,5 @@
 export const REST_COUNTRIES_URL = "https://restcountries.com/v3.1/all";
-export const PROXY_URL = 'https://api.allorigins.win/get?url=';
+export const UNSPLASH_URL = "https://api.unsplash.com/search/photos"
 
 export const IMAGES = [
   {

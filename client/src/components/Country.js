@@ -13,6 +13,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import BreadCrumbs from "../shared/Breadcrumbs";
+import { UNSPLASH_URL } from "../helpers/constants";
 
 const useStyles = makeStyles((theme) => ({
   countryContainer: {
@@ -76,7 +77,7 @@ const Country = ({ updateHeader }) => {
 
       try {
         const response = await axios.get(
-          "https://api.unsplash.com/search/photos",
+          UNSPLASH_URL,
           {
             params: {
               query: name.common,
